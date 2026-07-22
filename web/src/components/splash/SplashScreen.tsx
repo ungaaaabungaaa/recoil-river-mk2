@@ -4,10 +4,10 @@ import {Button} from '@astryxdesign/core/Button';
 import {useRouter} from 'next/navigation';
 
 const artLayers = [
-  {asset: '/splash/art-1.png', className: 'left-[4%] top-[3%] w-[34%]'},
-  {asset: '/splash/art-2.png', className: 'left-[10%] top-[51%] w-[27%]'},
-  {asset: '/splash/art-3.png', className: 'left-[31%] top-[10%] w-[38%]'},
-  {asset: '/splash/art-4.png', className: 'right-[3%] top-[12%] w-[38%]'},
+  {asset: '/art-1.png', className: 'left-[4%] top-[3%] w-[34%]'},
+  {asset: '/art-2.png', className: 'left-[10%] top-[51%] w-[27%]'},
+  {asset: '/art-3.png', className: 'left-[31%] top-[10%] w-[38%]'},
+  {asset: '/art-4.png', className: 'right-[3%] top-[12%] w-[38%]'},
 ] as const;
 
 export function SplashScreen() {

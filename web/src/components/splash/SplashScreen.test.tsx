@@ -29,10 +29,10 @@ describe('SplashScreen', () => {
 
     expect(layers).toHaveLength(4);
     expect(layers.map((layer) => (layer as HTMLElement).style.backgroundImage)).toEqual([
-      'url("/splash/art-1.png")',
-      'url("/splash/art-2.png")',
-      'url("/splash/art-3.png")',
-      'url("/splash/art-4.png")',
+      'url("/art-1.png")',
+      'url("/art-2.png")',
+      'url("/art-3.png")',
+      'url("/art-4.png")',
     ]);
   });
 
