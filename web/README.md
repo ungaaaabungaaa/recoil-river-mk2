@@ -9,3 +9,18 @@ The website reads and writes through Convex. It does not call Firecrawl, OpenRou
 See the [system architecture](../docs/architecture/system.md), [data model](../docs/architecture/data-model.md), and [UI direction](../docs/design/ui-direction.md). The [library and map mockup](../docs/mockups/library-map.html) shows the intended product language.
 
 Later work may add discovery views, a scrub timeline, and daily resurfacing. Those features do not exist in the MVP.
+
+## Local development
+
+Run these commands from `web/`:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+The splash screen is available at `http://localhost:3000/`. Its four replaceable artwork layers use `public/splash/art-1.png` through `art-4.png`. The login destination is at `/login`.
+
+## Vercel
+
+Set the Vercel project Root Directory to `web`. Vercel will detect the Next.js app from `web/package.json` and run its install and build commands from that directory.

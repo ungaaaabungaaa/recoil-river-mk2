@@ -1,0 +1,30 @@
+@layer reset, astryx-base, app;
+
+@import '@astryxdesign/core/reset.css' layer(reset);
+@import '@astryxdesign/core/astryx.css' layer(astryx-base);
+@import '@astryxdesign/theme-neutral/theme.css' layer(astryx-base);
+
+@layer app {
+  :root {
+    color-scheme: dark;
+    background: var(--color-background-surface);
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: var(--color-background-surface);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

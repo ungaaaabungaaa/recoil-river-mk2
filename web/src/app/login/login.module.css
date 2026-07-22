@@ -1,0 +1,60 @@
+.page {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: var(--spacing-6);
+  background: var(--color-background-body);
+}
+
+.card {
+  display: grid;
+  width: min(100%, 32rem);
+  gap: var(--spacing-5);
+  padding: clamp(var(--spacing-8), 8vw, var(--spacing-12));
+  border-radius: var(--radius-page);
+  background: var(--color-background-surface);
+  box-shadow: var(--shadow-high);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.14em;
+}
+
+.card h1 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-heading);
+  font-size: clamp(var(--font-size-3xl), 7vw, var(--font-size-5xl));
+  line-height: 1.05;
+}
+
+.intro {
+  max-width: 28rem;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-3);
+}
+
+.actions button {
+  min-width: 8rem;
+}
+
+@media (max-width: 32rem) {
+  .actions,
+  .actions button {
+    width: 100%;
+  }
+}

@@ -4,6 +4,8 @@
 
 # Dependencies
 node_modules/
+.pnpm-store/
+*.tsbuildinfo
 
 # Application and extension output
 .next/
