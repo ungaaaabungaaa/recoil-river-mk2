@@ -15,11 +15,11 @@ export function SplashScreen() {
 
   return (
     <main
-      className="relative min-h-svh bg-[var(--color-background-surface)] p-[clamp(var(--spacing-5),4vw,var(--spacing-10))] max-[48rem]:p-0"
+      className="relative min-h-svh bg-[var(--color-background-surface)]"
       aria-labelledby="splash-title"
     >
       <section
-        className="relative isolate min-h-[calc(100svh-(2*clamp(var(--spacing-5),4vw,var(--spacing-10))))] overflow-hidden rounded-[var(--radius-page)] bg-black max-[48rem]:min-h-svh max-[48rem]:rounded-none"
+        className="relative isolate min-h-svh overflow-hidden bg-black"
         aria-label="Recoil River splash screen"
       >
         <h1 id="splash-title" className="sr-only">
