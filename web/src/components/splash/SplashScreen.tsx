@@ -6,7 +6,7 @@ import {useRouter} from 'next/navigation';
 const artLayers = [
   {asset: '/art-1.png', className: 'left-[2%] top-[2%] w-[20%]'},
   {asset: '/art-2.png', className: 'bottom-[4%] left-[3%] w-[24%]'},
-  {asset: '/art-3.png', className: 'left-[14%] top-[8%] w-[30%]'},
+  {asset: '/art-3.png', className: 'right-[4%] top-[8%] w-[30%]'},
   {asset: '/art-4.png', className: 'left-1/2 top-1/2 w-[38%] -translate-x-1/2 -translate-y-1/2'},
 ] as const;
 
