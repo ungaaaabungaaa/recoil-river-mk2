@@ -1,0 +1,34 @@
+# Environment and credentials
+.env
+.env.*
+
+# Dependencies
+node_modules/
+
+# Application and extension output
+.next/
+dist/
+build/
+.output/
+.wxt/
+.turbo/
+
+# Test output
+coverage/
+
+# Local platform and deployment state
+.DS_Store
+.vercel/
+
+# Temporary screenshots and editor scratch files
+Screenshot*.png
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Agent scratch state
+.superpowers/
+.codex/
+.agents/
