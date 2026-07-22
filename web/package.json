@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@astryxdesign/cli": "latest",
+    "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "latest",
     "@testing-library/user-event": "latest",
@@ -29,6 +30,7 @@
     "eslint": "9.39.3",
     "eslint-config-next": "latest",
     "jsdom": "latest",
+    "tailwindcss": "^4.3.3",
     "typescript": "5.9.3",
     "vitest": "latest"
   }
