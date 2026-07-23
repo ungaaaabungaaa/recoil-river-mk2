@@ -22,7 +22,13 @@ vi.mock('next/navigation', () => ({
 }));
 
 vi.mock('@recoil-river/backend/api', () => ({
-  api: {graph: {getPopupSnapshot: 'graph:getPopupSnapshot'}},
+  api: {
+    graph: {getPopupSnapshot: 'graph:getPopupSnapshot'},
+    bookmarks: {
+      listRecent: 'bookmarks:listRecent',
+      getById: 'bookmarks:getById',
+    },
+  },
 }));
 
 vi.mock('./DynamicKnowledgeGraph', () => ({
@@ -58,6 +64,17 @@ const graph = {
   edges: [],
 };
 
+const detail = {
+  ...graph.nodes[0],
+  originalUrl: 'https://example.com/article',
+  canonicalUrl: 'https://example.com/article',
+  updatedAt: 2,
+  summary: 'A connected article about building a useful second brain.',
+  topics: ['knowledge systems', 'design'],
+  entities: ['Recoil River'],
+  markdown: '# Connected article\n\nA short extracted passage.',
+};
+
 describe('GraphPage', () => {
   beforeEach(() => {
     mocks.auth.isAuthenticated = true;
@@ -65,7 +82,15 @@ describe('GraphPage', () => {
     mocks.push.mockReset();
     mocks.replace.mockReset();
     mocks.useQuery.mockReset();
-    mocks.useQuery.mockReturnValue(graph);
+    mocks.useQuery.mockImplementation((query: string) => {
+      if (query === 'bookmarks:listRecent') {
+        return graph.nodes;
+      }
+      if (query === 'bookmarks:getById') {
+        return detail;
+      }
+      return graph;
+    });
   });
 
   it('redirects signed-out visitors through login and preserves /graph', async () => {
@@ -102,11 +127,18 @@ describe('GraphPage', () => {
     expect(
       screen.getByRole('button', {name: 'Rendered force graph with 1 nodes'}),
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole('link', {name: 'Open Connected article'}),
-    ).toHaveAttribute('href', '/bookmarks/bookmark-one');
+    expect(screen.getByText('Connected article')).toBeInTheDocument();
+    expect(screen.getByText('example.com')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Shared force graph'));
-    expect(mocks.push).toHaveBeenCalledWith('/bookmarks/bookmark-one');
+    expect(
+      screen.getByRole('heading', {name: 'Connected article'}),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('A connected article about building a useful second brain.'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', {name: 'Open full reader'}),
+    ).toHaveAttribute('href', '/bookmarks/bookmark-one');
   });
 });
