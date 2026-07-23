@@ -88,8 +88,52 @@ bootstrap templates so local tests and clients remain type-safe.
 
 Set the Vercel Root Directory to `web` and enable **Include source files outside
 of the Root Directory** so Vercel can read the root lockfile and
-`@recoil-river/backend` and `@recoil-river/graph`. Configure
-`NEXT_PUBLIC_CONVEX_URL` in Vercel.
+`@recoil-river/backend` and `@recoil-river/graph`. The checked-in
+[`web/vercel.json`](web/vercel.json) installs from the workspace root and runs
+the website build from the workspace root.
+
+Create a **production Convex deployment** before creating the Vercel project:
+
+```bash
+pnpm exec convex deploy
+```
+
+Copy the production `https://…convex.cloud` URL into Vercel as:
+
+```text
+NEXT_PUBLIC_CONVEX_URL=https://your-production-deployment.convex.cloud
+```
+
+After `vercel login` and `vercel link`, add it to the Vercel **Production**
+environment (or add it in Project Settings → Environment Variables):
+
+```bash
+printf '%s\n' 'https://your-production-deployment.convex.cloud' | \
+  vercel env add NEXT_PUBLIC_CONVEX_URL production
+```
+
+Do not add `FIRECRAWL_API_KEY`, `OPENROUTER_API_KEY`, `JWT_PRIVATE_KEY`, or
+`JWKS` to Vercel. They belong only to the production Convex deployment.
+
+Configure these variables on the production Convex deployment only. The two
+provider values are secrets and must be entered interactively; the model names
+are non-secret defaults:
+
+```bash
+pnpm exec convex env set FIRECRAWL_API_KEY
+pnpm exec convex env set OPENROUTER_API_KEY
+pnpm exec convex env set OPENROUTER_SUMMARY_MODEL openai/gpt-5-mini
+pnpm exec convex env set OPENROUTER_EMBEDDING_MODEL openai/text-embedding-3-small
+```
+
+Run the Auth setup against the production deployment and set its `SITE_URL` to
+the final Vercel URL. Auth signing variables stay inside Convex and are never
+copied to Vercel or the extension:
+
+```bash
+CONVEX_DEPLOYMENT=prod:your-team:your-project \
+pnpm --shell-mode --filter @recoil-river/backend exec 'cd .. && auth'
+```
 
 Build the extension with its real public origins:
 
