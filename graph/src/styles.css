@@ -1,0 +1,77 @@
+.rr-graph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #111111;
+}
+
+.rr-graph canvas {
+  display: block;
+  outline: none;
+}
+
+.rr-graph-empty {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #111111;
+  color: #f7f7f4;
+  text-align: center;
+}
+
+.rr-graph-empty__mark {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 18px;
+  border: 1px solid #8d8d88;
+  border-radius: 50%;
+}
+
+.rr-graph-empty__mark::before,
+.rr-graph-empty__mark::after {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #f7f7f4;
+  content: "";
+}
+
+.rr-graph-empty__mark::before {
+  top: 37px;
+  left: 12px;
+}
+
+.rr-graph-empty__mark::after {
+  top: 18px;
+  right: 14px;
+}
+
+.rr-graph-empty p {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rr-graph-empty small {
+  color: #8d8d88;
+  font-size: 10px;
+}
+
+.rr-graph-empty--fullscreen .rr-graph-empty__mark {
+  width: 90px;
+  height: 90px;
+}
+
+.rr-graph-empty--fullscreen p {
+  font-size: clamp(18px, 2vw, 26px);
+}
+
+.rr-graph-empty--fullscreen small {
+  font-size: 12px;
+}

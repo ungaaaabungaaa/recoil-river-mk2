@@ -1,26 +1,19 @@
 # Website
 
-`web/` will own the Next.js product surface.
+The Next.js website provides shared Convex password login/signup, the private
+`/bookmarks/[id]` reader, and an authenticated full-screen `/graph` route using
+the same `react-force-graph-2d` component as the Chrome popup. Login lands on
+`/graph` unless a safe private reader deep link was requested.
 
-The first release will provide a public landing page, a sign-in entry point, a private visual library, and an Obsidian-style mind map. The library will lead with source imagery and page context. The map will show saved pages as a dense, navigable graph.
+The reader shows partial data when enrichment fails and renders extracted
+Markdown without raw HTML execution or embedded remote images.
 
-The website reads and writes through Convex. It does not call Firecrawl, OpenRouter, or Exa from the browser, and it does not receive provider keys or Convex deployment credentials.
-
-See the [system architecture](../docs/architecture/system.md), [data model](../docs/architecture/data-model.md), and [UI direction](../docs/design/ui-direction.md). The [library and map mockup](../docs/mockups/library-map.html) shows the intended product language.
-
-Later work may add discovery views, a scrub timeline, and daily resurfacing. Those features do not exist in the MVP.
-
-## Local development
-
-Run these commands from `web/`:
+Configure `NEXT_PUBLIC_CONVEX_URL` in `.env.local`, then run:
 
 ```bash
-pnpm install
-pnpm dev
+pnpm --filter recoil-river-web dev
 ```
 
-The splash screen is available at `http://localhost:3000/`. Its four replaceable artwork layers use `public/splash/art-1.png` through `art-4.png`. The login destination is at `/login`.
-
-## Vercel
-
-Set the Vercel project Root Directory to `web`. Vercel will detect the Next.js app from `web/package.json` and run its install and build commands from that directory.
+For Vercel, set the project Root Directory to `web`, enable source files outside
+that directory, and configure the same public Convex deployment URL used by the
+extension.

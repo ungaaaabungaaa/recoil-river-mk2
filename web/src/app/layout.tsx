@@ -1,12 +1,12 @@
+import '@fontsource-variable/space-grotesk/wght.css';
+import '@recoil-river/graph/styles.css';
+
 import type {Metadata} from 'next';
 import type {ReactNode} from 'react';
-import {Roboto} from 'next/font/google';
-import './globals.css';
 
-const roboto = Roboto({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import {ConvexClientProvider} from '@/components/providers/ConvexClientProvider';
+
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Recoil River',
@@ -16,7 +16,9 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: Readonly<{children: ReactNode}>) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body>
+        <ConvexClientProvider>{children}</ConvexClientProvider>
+      </body>
     </html>
   );
 }

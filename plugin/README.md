@@ -1,9 +1,20 @@
-# Chrome Extension
+# Chrome extension
 
-`plugin/` will own a Chrome Manifest V3 extension for manual capture.
+The WXT React popup is a 380×560 monochrome capture surface. It reads the active
+tab only when the toolbar popup opens, saves it through Convex, draws the
+authenticated user’s real 120-node snapshot with `react-force-graph-2d`, and
+links graph nodes plus the newest 12 bookmarks to the private website reader.
 
-The popup will identify the current page, show a compact graph preview from the signed-in account, and expose one primary action: `Add this page`. The extension will send the current page context to Convex and then reflect realtime updates from the same account as the website.
+The canvas supports force clustering, zoom, pan, and node dragging. Ready,
+in-progress, and failed bookmarks have distinct monochrome node treatments.
 
-The extension will not observe browsing history. A page enters the account only after the user presses the capture action. It will not contain provider keys or Convex deployment credentials.
+Configure `WXT_PUBLIC_CONVEX_URL` and `WXT_PUBLIC_WEB_URL` in `.env.local`.
 
-Read the [system architecture](../docs/architecture/system.md) and [privacy expectations](../docs/privacy.md). The [popup mockup](../docs/mockups/plugin.html) records the compact graph-first direction.
+```bash
+pnpm --filter @recoil-river/plugin dev
+pnpm --filter @recoil-river/plugin build
+pnpm --filter @recoil-river/plugin zip
+```
+
+The generated manifest must contain only `activeTab`, the exact configured
+Convex host permission, and matching HTTPS/WSS `connect-src` entries.

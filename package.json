@@ -1,0 +1,20 @@
+{
+  "name": "recoil-river",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.13.0",
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "codegen": "convex codegen",
+    "dev:convex": "convex dev",
+    "dev:plugin": "pnpm --filter @recoil-river/plugin dev",
+    "dev:web": "pnpm --filter recoil-river-web dev",
+    "lint": "pnpm -r --if-present lint",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "zip:plugin": "pnpm --filter @recoil-river/plugin zip"
+  },
+  "devDependencies": {
+    "convex": "1.42.3"
+  }
+}

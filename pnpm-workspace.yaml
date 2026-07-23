@@ -1,0 +1,11 @@
+packages:
+  - web
+  - plugin
+  - convex
+  - graph
+
+allowBuilds:
+  esbuild: true
+  sharp: true
+  spawn-sync: true
+  unrs-resolver: true
