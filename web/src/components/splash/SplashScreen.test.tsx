@@ -3,14 +3,26 @@ import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {SplashScreen} from './SplashScreen';
 
 const push = vi.fn();
+const replace = vi.fn();
+const authState = vi.hoisted(() => ({
+  isAuthenticated: false,
+  isLoading: false,
+}));
 
 vi.mock('next/navigation', () => ({
-  useRouter: () => ({push}),
+  useRouter: () => ({push, replace}),
+}));
+
+vi.mock('@convex-dev/auth/react', () => ({
+  useConvexAuth: () => authState,
 }));
 
 describe('SplashScreen', () => {
   beforeEach(() => {
     push.mockReset();
+    replace.mockReset();
+    authState.isAuthenticated = false;
+    authState.isLoading = false;
   });
 
   it('exposes the exact CTA and a descriptive accessible name', () => {
@@ -41,6 +53,14 @@ describe('SplashScreen', () => {
 
     screen.getByRole('button', {name: 'FU*K ME'}).click();
 
-    expect(push).toHaveBeenCalledWith('/login');
+    expect(push).toHaveBeenCalledWith('/login?returnTo=%2Fgraph');
+  });
+
+  it('routes an authenticated visitor directly to the graph', () => {
+    authState.isAuthenticated = true;
+
+    render(<SplashScreen />);
+
+    expect(replace).toHaveBeenCalledWith('/graph');
   });
 });

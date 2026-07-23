@@ -5,6 +5,15 @@ import {describe, expect, it, vi} from 'vitest';
 import {LoginForm} from './LoginForm';
 
 describe('LoginForm', () => {
+  it('uses the reference welcome copy for the default sign-in mode', () => {
+    render(<LoginForm onSubmit={vi.fn()} />);
+
+    expect(screen.getByRole('heading', {name: 'Welcome back'})).toBeInTheDocument();
+    expect(
+      screen.getByText('Enter your details to sign in to your account'),
+    ).toBeInTheDocument();
+  });
+
   it('submits an explicit email/password login flow', async () => {
     const user = userEvent.setup();
     const submit = vi.fn();
@@ -25,7 +34,7 @@ describe('LoginForm', () => {
     const user = userEvent.setup();
     render(<LoginForm onSubmit={vi.fn()} />);
 
-    await user.click(screen.getByRole('button', {name: 'Create an account'}));
+    await user.click(screen.getByRole('button', {name: 'Sign up'}));
 
     expect(
       screen.getByRole('heading', {name: 'Start your river.'}),

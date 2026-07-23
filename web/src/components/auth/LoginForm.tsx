@@ -36,11 +36,11 @@ export function LoginForm({
           RECOIL RIVER
         </header>
         <div>
-          <p className="login-kicker">A PRIVATE SECOND BRAIN</p>
+          <p className="login-kicker">RECOIL RIVER / PRIVATE SECOND BRAIN</p>
           <p className="login-display">
-            What you save
+            Keep the signal.
             <br />
-            starts to connect.
+            lose the noise.
           </p>
         </div>
         <p className="login-index">01 — CAPTURE / 02 — EXTRACT / 03 — CONNECT</p>
@@ -49,10 +49,10 @@ export function LoginForm({
       <section className="login-form-panel">
         <div className="login-form-wrap">
           <p className="section-number">{flow === 'signIn' ? '01' : '02'}</p>
-          <h1>{flow === 'signIn' ? 'Return to your river.' : 'Start your river.'}</h1>
+          <h1>{flow === 'signIn' ? 'Welcome back' : 'Start your river.'}</h1>
           <p className="login-intro">
             {flow === 'signIn'
-              ? 'Use the same account as your Chrome extension.'
+              ? 'Enter your details to sign in to your account'
               : 'One account. Separate secure sessions for web and Chrome.'}
           </p>
 
@@ -92,17 +92,24 @@ export function LoginForm({
             </button>
           </form>
 
-          <button
-            className="login-mode-switch"
-            type="button"
-            onClick={() =>
-              setFlow((current) =>
-                current === 'signIn' ? 'signUp' : 'signIn',
-              )
-            }
-          >
-            {flow === 'signIn' ? 'Create an account' : 'I already have an account'}
-          </button>
+          <div className="login-switch-row">
+            <span>
+              {flow === 'signIn'
+                ? "Don't have an account?"
+                : 'Already have an account?'}
+            </span>
+            <button
+              className="login-mode-switch"
+              type="button"
+              onClick={() =>
+                setFlow((current) =>
+                  current === 'signIn' ? 'signUp' : 'signIn',
+                )
+              }
+            >
+              {flow === 'signIn' ? 'Sign up' : 'Log in'}
+            </button>
+          </div>
           <p className="login-demo-note">
             Hackathon authentication: email verification and password recovery
             are not enabled yet.

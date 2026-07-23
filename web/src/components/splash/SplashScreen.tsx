@@ -1,7 +1,9 @@
 'use client';
 
 import {Button} from '@astryxdesign/core/Button';
+import {useConvexAuth} from '@convex-dev/auth/react';
 import {useRouter} from 'next/navigation';
+import {useEffect} from 'react';
 
 const artLayers = [
   {asset: '/art-1.png', className: 'left-0 top-[2%] w-[20%]'},
@@ -12,6 +14,13 @@ const artLayers = [
 
 export function SplashScreen() {
   const router = useRouter();
+  const {isAuthenticated, isLoading} = useConvexAuth();
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.replace('/graph');
+    }
+  }, [isAuthenticated, isLoading, router]);
 
   return (
     <main
@@ -48,7 +57,7 @@ export function SplashScreen() {
             size="lg"
             type="button"
             variant="primary"
-            onClick={() => router.push('/login')}
+            onClick={() => router.push('/login?returnTo=%2Fgraph')}
           />
         </aside>
       </section>
