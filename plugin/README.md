@@ -10,6 +10,10 @@ in-progress, and failed bookmarks have distinct monochrome node treatments.
 
 Configure `WXT_PUBLIC_CONVEX_URL` and `WXT_PUBLIC_WEB_URL` in `.env.local`.
 
+The workspace install safely skips WXT manifest preparation when the Convex
+URL is absent (for example, when Vercel is installing only the website). A
+real extension build or zip still requires the HTTPS `WXT_PUBLIC_CONVEX_URL`.
+
 ```bash
 pnpm --filter @recoil-river/plugin dev
 pnpm --filter @recoil-river/plugin build
