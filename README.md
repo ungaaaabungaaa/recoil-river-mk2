@@ -89,8 +89,9 @@ bootstrap templates so local tests and clients remain type-safe.
 Set the Vercel Root Directory to `web` and enable **Include source files outside
 of the Root Directory** so Vercel can read the root lockfile and
 `@recoil-river/backend` and `@recoil-river/graph`. The checked-in
-[`web/vercel.json`](web/vercel.json) installs from the workspace root and runs
-the website build from the workspace root.
+[`web/vercel.json`](web/vercel.json) follows Convex's Vercel build flow:
+`npx convex deploy` deploys the backend first, injects the production URL as
+`NEXT_PUBLIC_CONVEX_URL`, and then runs the Next.js build.
 
 Create a **production Convex deployment** before creating the Vercel project:
 
@@ -98,19 +99,18 @@ Create a **production Convex deployment** before creating the Vercel project:
 pnpm exec convex deploy
 ```
 
-Copy the production `https://…convex.cloud` URL into Vercel as:
-
-```text
-NEXT_PUBLIC_CONVEX_URL=https://your-production-deployment.convex.cloud
-```
-
-After `vercel login` and `vercel link`, add it to the Vercel **Production**
-environment (or add it in Project Settings → Environment Variables):
+After `vercel login` and `vercel link`, create a **production deploy key** in
+the Convex dashboard with the `deployment:deploy` permission. Add that key to
+the Vercel **Production** environment (or add it in Project Settings →
+Environment Variables):
 
 ```bash
-printf '%s\n' 'https://your-production-deployment.convex.cloud' | \
-  vercel env add NEXT_PUBLIC_CONVEX_URL production
+printf '%s\n' 'your-convex-production-deploy-key' | \
+  vercel env add CONVEX_DEPLOY_KEY production
 ```
+
+The build command injects `NEXT_PUBLIC_CONVEX_URL` automatically, so it does
+not need to be entered manually in Vercel.
 
 Do not add `FIRECRAWL_API_KEY`, `OPENROUTER_API_KEY`, `JWT_PRIVATE_KEY`, or
 `JWKS` to Vercel. They belong only to the production Convex deployment.
